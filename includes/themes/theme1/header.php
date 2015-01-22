@@ -27,6 +27,7 @@
 	<div id="content-wrapper">
 		<header>
 			<div class="top large-12">
+				<?php menu('header-menu-t1'); ?>
 			</div>
 			<div class="slide">
 			</div>
