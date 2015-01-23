@@ -4,9 +4,9 @@ include('config_frontpage.php');
 include('config_grid.php');
 
 // revisa si el Usuario tiene permiso de editar las opciones
-if (!current_user_can('manage_options')) {
+/*if (!current_user_can('manage_options')) {
     wp_die('You do not have sufficient permissions to access this page.');
-}
+}*/
 
 
 //Añade los menús al administrador

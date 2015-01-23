@@ -1,4 +1,4 @@
-var elementCounter = jQuery("input[name=element-max-id]").val();
+    var elementCounter = jQuery("input[name=element-max-id]").val();
 
     function setElementId(element, id) {
         var newId = "front-page-element-" + id;    
@@ -12,32 +12,25 @@ var elementCounter = jQuery("input[name=element-max-id]").val();
         labelField.attr("for", "element-page-id-" + id); 
     }
 
-    jQuery(document).ready(function() {           
-        jQuery("#add-featured-post").click(function() {
-            var elementRow = jQuery("#front-page-element-placeholder").clone();
-            var newId = "front-page-element-" + elementCounter;
-                
-            elementRow.attr("id", newId);
-            elementRow.show();
-                
-            var inputField = jQuery("select", elementRow);
-            inputField.attr("name", "element-page-id-" + elementCounter); 
-                 
-            var labelField = jQuery("label", elementRow);
-            labelField.attr("for", "element-page-id-" + elementCounter); 
-            
-            var removeLink = jQuery("a", elementRow).click(function() {
-                removeElement(elementRow);  
-                return false;
-            });
+    jQuery(document).ready(function() {
 
-            elementCounter++;
-            jQuery("input[name=element-max-id]").val(elementCounter);
-                 
-            jQuery("#featured-posts-list").append(elementRow);
-                
-            return false;
-        });
+        jQuery("#add-featured-post").click(
+            function(){
+                var arg = [];
+                arg[0] = ["select","element-page-id-"];
+                duplicar(arg);
+            });
+        jQuery("#add-spesific-theme").click(
+            function(){
+                var arg = [];
+                arg[0] = ["input","grid_sp-"];
+                arg[1] = ["input","page_id_theme-","page_id"];
+                duplicar(arg);
+            }
+
+        );
+
+
         jQuery("#featured-posts-list").sortable( {
             stop: function(event, ui) {
                 var i = 0;
@@ -55,7 +48,52 @@ var elementCounter = jQuery("input[name=element-max-id]").val();
         
         function removeElement(element) {
             jQuery(element).remove();
-        }   
+        }  
+
+        function duplicar(arg){
+
+            var elementRow = jQuery("#front-page-element-placeholder").clone();
+            var newId = "front-page-element-" + elementCounter;
+                
+            elementRow.attr("id", newId);
+            elementRow.show();
+
+            jQuery.each( arg, function( i, val ) {
+                var type = arg[i][0];
+                var new_name = arg[i][1]; 
+                var page_id = arg[i][2];
+
+                if(page_id){
+                    name_fields(type, new_name, elementCounter, elementRow, page_id);
+                }else{
+                    name_fields(type, new_name, elementCounter, elementRow);
+                }
+            });
+                 
+            var labelField = jQuery("label", elementRow);
+            labelField.attr("for", "element-page-id-" + elementCounter); 
+            
+            var removeLink = jQuery("a", elementRow).click(function() {
+                removeElement(elementRow);  
+                return false;
+            });
+
+            elementCounter++;
+            jQuery("input[name=element-max-id]").val(elementCounter);
+                 
+            jQuery("#duplicate-list").append(elementRow);
+                
+            return false;
+        }
+
+        function name_fields(type, new_name, elementCounter, elementRow, page_id){
+            if(page_id){
+                jQuery('.' + page_id, elementRow).attr("name", new_name + elementCounter);
+            }else{
+                var inputField = jQuery(type, elementRow);
+                inputField.attr("name", new_name + elementCounter);
+            }
+        }
     });
 
 

@@ -9,78 +9,30 @@ function grid() {
         $grid_gen = esc_attr($_POST["grid_gen"]);
         update_option("pua_grid_general", $grid_gen);
 
-        $grid_sp = esc_attr($_POST["grid_sp"]);
-        $page_id_theme = esc_attr($_POST["page_id_theme"]);
-        update_option("pua_grid_spesific", [$page_id_theme, $grid_sp]);
+
+        $max_id = esc_attr($_POST["element-max-id"]);
+        for ($i = 0; $i < $max_id; $i ++) {
+            $field_name = "grid_sp-" . $i;
+            $field_name2 = "page_id_theme-" . $i;
+
+            if (isset($_POST[$field_name]) && isset($_POST[$field_name2])) {
+                $pua_grid_spesific[] = [esc_attr($_POST[$field_name]), esc_attr($_POST[$field_name2])];
+            }
+        }
+         update_option("pua_grid_spesific", $pua_grid_spesific);
+
+        //$grid_sp = esc_attr($_POST["grid_sp"]);
+        //$page_id_theme = esc_attr($_POST["page_id_theme"]);
+        //update_option("pua_grid_spesific", [$page_id_theme, $grid_sp]);
 
         ?>
             <div id="message" class="updated">Settings saved</div>
         <?php
     }
 
-    ?>
-    <!-- form builder -->
-    <div class="wrap">
-	    <?php screen_icon('themes'); ?> 
-	    <h2>Grid selector</h2>
+    $element_counter = 0;
 
-		<form method="POST" action="">
-		<h3>Front Theme</h3>
-		<?php $options = get_option( 'pua_grid_front' ); ?>
-		
-		<label>Theme 1</label>
-		<input type="radio" name="grid_front" value="theme1" <?php checked( 'theme1' == $options ); ?> />
-		<label>Theme 2</label>
-		<input type="radio" name="grid_front" value="theme2" <?php checked( 'theme2' == $options ); ?> />
+    $pua_grid_spesific = get_option("pua_grid_spesific");
 
-		<h3>Internal Theme</h3>
-		<?php $options_gen = get_option( 'pua_grid_general' ); ?>
-		
-		<label>Theme 1</label>
-		<input type="radio" name="grid_gen" value="theme1" <?php checked( 'theme1' == $options_gen ); ?> />
-		<label>Theme 2</label>
-		<input type="radio" name="grid_gen" value="theme2" <?php checked( 'theme2' == $options_gen ); ?> />
-		<label>None</label>
-		<input type="radio" name="grid_gen" value="" <?php checked( '' == $options_gen ); ?> />
-
-
-		<h3>Espesific Theme</h3>
-
-		<a href="#" id="add-spesific-theme">Add spesific theme</a> 
-			
-		<?php $options_sp = get_option( 'pua_grid_spesific'); 		
-		//if($options_gen){
-		?>
-			 <table class="form-table">
-	            <tr valign="top">
-	                <th scope="row">
-	                    <label>
-	                       Page id
-	                    </label>
-	                </th>
-	                <td>
-	                    <input type="text" name="page_id_theme" value="<?php echo $options_sp[0];?>" size="25" />
-	                </td>
-	            </tr>                
-	        </table>
-			
-			<label>Theme 1</label>
-			<input type="radio" name="grid_sp" value="theme1" <?php checked( 'theme1' == $options_sp[1] ); ?> />
-			<label>Theme 2</label>
-			<input type="radio" name="grid_sp" value="theme2" <?php checked( 'theme2' == $options_sp[1] ); ?> />
-			<label>None</label>
-			<input type="radio" name="grid_sp" value="" <?php checked( '' == $options_sp[1] ); ?> />
-		<?php //} ?>
-		
-
-		<input type="hidden" name="update_settings" value="Y" />
-
-		<p>
-            <input type="submit" value="Save settings" class="button-primary"/>
-        </p> 
-
-	</form>
-	<script src="<?php bloginfo('template_url') ?>/admin/admin.js"></script>
-
-    <?php
+    include('forms/grid_form.php');
 }
