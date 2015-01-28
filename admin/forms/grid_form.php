@@ -5,6 +5,7 @@
 	.theme_sp h3{ height: auto !important;}
 	.theme_sp h3 span{ width: 100%; display:  block; font-weight: normal;}
 	.theme_sp .theme-actions{height: 57px !important;}
+	.theme-browser .theme:nth-child(3n){ margin-right: 4%;}
 </style>
 
     <div class="wrap">
@@ -20,6 +21,7 @@
 
 		<div class="puatheme front">
 		<h2>Front Theme</h2>
+		<p>Select a theme for your frontend</p>
 		<?php 
 			$options = get_option( 'pua_grid_front' );
 
@@ -46,6 +48,7 @@
 		</div>
 		<div class="puatheme Internal">
 		<h2>Internal Theme</h2>
+		<p>Select a theme for the internal pages</p>
 		<?php 
 			$options_gen = get_option( 'pua_grid_general' );
 
@@ -71,6 +74,7 @@
 		</div>
 	<div class="puatheme spesific">
 		<h2>Espesific Theme</h2>
+		<p>Select a spesific theme for a spesific page</p>
 
 		<div class="remove">
 			<a href="#" id="add-spesific-theme" class="button button-primary">

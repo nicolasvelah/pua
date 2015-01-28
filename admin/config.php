@@ -2,6 +2,7 @@
 
 include('config_frontpage.php');
 include('config_grid.php');
+include('config_slider.php');
 
 // revisa si el Usuario tiene permiso de editar las opciones
 /*if (!current_user_can('manage_options')) {
@@ -20,7 +21,11 @@ function setup_theme_admin_menus() {
 
     add_submenu_page('pua_settings', 
         'Front Page Elements', 'Front Page', 'manage_options', 
-        'front_settings', 'FrontPage'); 
+        'front_settings', 'FrontPage');
+
+    add_submenu_page('pua_settings', 
+        'Slides Item', 'Slider', 'manage_options', 
+        'slider_settings', 'slider'); 
 }
 
 
