@@ -24,8 +24,12 @@ function setup_theme_admin_menus() {
         'front_settings', 'FrontPage');
 
     add_submenu_page('pua_settings', 
-        'Slides Item', 'Slider', 'manage_options', 
-        'slider_settings', 'slider'); 
+        'Slides list', 'Slider', 'manage_options', 
+        'slider_settings', 'slider_list');
+
+    add_submenu_page('slider_settings', 
+        'Slides Item', 'Add new slide item', 'manage_options', 
+        'slider_settings', 'slider');
 }
 
 

@@ -171,7 +171,7 @@
             <input type="submit" value="Save settings" class="button-primary"/>
         </p>
 	</form>
-	<script src="<?php bloginfo('template_url') ?>/admin/admin.js"></script>
+	<script src="<?php bloginfo('template_url') ?>/admin/js/admin.js"></script>
 </div>
 </div>
 
