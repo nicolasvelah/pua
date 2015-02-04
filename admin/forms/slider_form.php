@@ -32,7 +32,7 @@
 										<img src="'.$slide[1].'" width="200">
 										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
 										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
-										<a href="#" id="remove">Remove</a>
+										<a href="#" id="remove'.$frond_counter.'" onclick=" get_delete_data('.$frond_counter.', '.$id.')">Remove</a>
 									</div>
 									';
 									$frond_counter++;
@@ -63,10 +63,14 @@
 		<input type="text" class="url" value="">
 		<a href="#" id="remove">Remove</a>
 	</div>
+
+	<div id="display"></div>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript">
 		var counter = <?= $frond_counter ?>;
 		var templateUrl = '<?= get_bloginfo("template_url"); ?>';
 		var slider_activate = true;
+		var adminUrl = '<?= admin_url(); ?>';
 
 		var imported = document.createElement('script');
 		imported.src = templateUrl + '/admin/js/admin.js';

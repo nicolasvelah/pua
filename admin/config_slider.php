@@ -20,6 +20,8 @@ function slider(){
 		$id = count($pua_sliders) + 1;
 		echo '2'.$id;
 	}
+
+	if($id == ''){$id = 1;}
 	
 	
 	$element_counter = count($pua_sliders[$id]);
@@ -73,5 +75,74 @@ function slider(){
 
 	$slide_title = $pua_sliders[$id]['title'];
 
+	
+
 	include('forms/slider_form.php');
 }
+
+
+/*Eliminar slide*/
+
+function delete_slide(){
+	if($_POST['slide_id']){
+		$slide_id = $_POST['slide_id'];
+	}else{
+		$slide_id = null;
+	}
+	$cat_slide_id = $_POST['cat_slide_id'];
+	$id_slide = 1;
+	$id_slide2 = 1;
+
+	$pua_sliders = get_option("pua_sliders");
+	$pua_sliders_holder = [];
+	$$pua_sliders_tipo  = [];
+
+	if($pua_sliders[$cat_slide_id] && $slide_id != null){
+		foreach ($pua_sliders[$cat_slide_id] as $slide) {
+			if(is_array ($slide)){
+				if($id_slide != $slide_id){
+					$slide[2] = 'img_title-'.$id_slide2;
+					array_push($pua_sliders_holder, $slide);
+					$id_slide2++;
+				}
+				$id_slide++;
+			}else{
+				if($slide == $pua_sliders[$cat_slide_id]['id']){
+					$tipo = 'id';
+				}else if($slide == $pua_sliders[$cat_slide_id]['title']){
+					$tipo = 'title';
+				}
+				$pua_sliders_tipo[$tipo] = $slide;
+			}
+		}
+	
+		$pua_sliders[$cat_slide_id] = $pua_sliders_holder;
+		$val_tipo = 1;
+		foreach ($pua_sliders_tipo as $tipo) {
+			if($val_tipo == 1){$tipo_t = 'id';}
+			else{$tipo_t = 'title';}
+			$pua_sliders[$cat_slide_id][$tipo_t] = $tipo;
+			$val_tipo++;
+		}
+	}else{
+		$pua_sliders_holder[0] = '';
+		//print_r($pua_sliders);
+		echo '<br><br>';
+		foreach ($pua_sliders as $slide) {
+			if($slide['title'] != $pua_sliders[$cat_slide_id]['title']){
+				array_push($pua_sliders_holder, $slide);
+			}
+
+		}
+		unset($pua_sliders_holder[0]);
+
+		$pua_sliders = $pua_sliders_holder;
+
+		//print_r($pua_sliders);
+	}
+	update_option("pua_sliders", $pua_sliders);
+}
+
+
+add_action('wp_ajax_delete_puaslide', 'delete_slide');
+add_action('wp_ajax_nopriv_delete_puaslide', 'delete_slide');

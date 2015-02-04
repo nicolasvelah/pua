@@ -1,5 +1,7 @@
  /*SLIDER ADMIN*/
 var t=jQuery;
+jQuery( ".postbox" ).draggable();
+
 jQuery("#insert-image").click(function(e){
     //alert('lklegoi');
     e.preventDefault();
@@ -37,4 +39,27 @@ function insertImageSlide(i,l,s,n,a){
     jQuery("#duplicate-list").append(d);
     jQuery("#element-max-id").attr("value",counter);
     counter++;
+}
+
+function get_delete_data(id_slide, id_cat_slide){
+
+    cat_id = id_cat_slide;
+
+    if(id_slide == null){
+        slide_id = "";
+    }else{
+        slide_id = "&slide_id=" + id_slide;
+    }
+    jQuery("#display").empty();
+    jQuery.ajax({
+        url: adminUrl + "admin-ajax.php",
+        type:"POST",
+        data:"action=delete_puaslide&cat_slide_id=" + cat_id + slide_id,
+         
+        success:function(results){
+            //jQuery("#display").empty();
+            //jQuery("#display").append(results);
+            location.reload();
+        }
+    });
 }
