@@ -12,10 +12,8 @@ function slider_list(){
 function slider(){
 	//delete_option( "pua_sliders");
 	$pua_sliders = get_option("pua_sliders");
-	//echo count($pua_sliders).'<br>';
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
-		//echo '1'.$id;
 	}else if(isset($_GET['new'])){
 		$id = count($pua_sliders) + 1;
 		echo '2'.$id;
@@ -30,7 +28,6 @@ function slider(){
 	if (isset($_POST["update_settings"])) {
 
 		$id = $_POST['id'];
-	//echo '3';
 
 		$max_id = $_POST["element-max-id"];
 
@@ -44,10 +41,8 @@ function slider(){
             	if($pua_sliders != ''){
             		if($pua_sliders[$id]){
 		            	foreach ($pua_sliders[$id] as $slide) {
-		            		//print_r($slide[2]);
 		            		if($slide[2] == $field_name){
 		            			$repeat = true;
-		            			//echo 'repeat '. $repeat .' '.$field_name.' = '.$slide[2].'<br>';
 		            		}
 		            	}
 		            }
