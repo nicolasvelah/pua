@@ -37,6 +37,7 @@ function slider(){
 		for ($i = 1; $i <= $max_id; $i ++) {
             $field_name = "img_title-" . $i;
             $field_name2 = "img_url-" . $i;
+            $field_name3 = "img_order-" . $i;
             $repeat = false;
 
             if (isset($_POST[$field_name]) && isset($_POST[$field_name2])) {
@@ -52,7 +53,7 @@ function slider(){
 		            }
 	            }
             	if($repeat == false){
-                	$pua_sliders[$id][] = [esc_attr($_POST[$field_name]), esc_attr($_POST[$field_name2]), $field_name];
+                	$pua_sliders[$id][] = [esc_attr($_POST[$field_name]), esc_attr($_POST[$field_name2]), $field_name, esc_attr($_POST[$field_name3])];
             	}
             }
             $element_counter ++;
@@ -61,7 +62,7 @@ function slider(){
         $pua_sliders[$id]['title'] = $_POST['slider_title'];
         update_option("pua_sliders", $pua_sliders);
         ?>
-            <div id="message" class="updated">Settings saved</div>
+            <div id="message" class="updated">Slide saved</div>
         <?php
 	}
 
@@ -102,6 +103,7 @@ function delete_slide(){
 			if(is_array ($slide)){
 				if($id_slide != $slide_id){
 					$slide[2] = 'img_title-'.$id_slide2;
+					$slide[3] = $id_slide2;
 					array_push($pua_sliders_holder, $slide);
 					$id_slide2++;
 				}
@@ -124,13 +126,17 @@ function delete_slide(){
 			$pua_sliders[$cat_slide_id][$tipo_t] = $tipo;
 			$val_tipo++;
 		}
+
+		$resp = 'slide';
 	}else{
 		$pua_sliders_holder[0] = '';
 		//print_r($pua_sliders);
-		echo '<br><br>';
+		//echo '<br><br>';
 		foreach ($pua_sliders as $slide) {
 			if($slide['title'] != $pua_sliders[$cat_slide_id]['title']){
+				$slide['id'] = $id_slide;
 				array_push($pua_sliders_holder, $slide);
+				$id_slide++;
 			}
 
 		}
@@ -139,8 +145,11 @@ function delete_slide(){
 		$pua_sliders = $pua_sliders_holder;
 
 		//print_r($pua_sliders);
+		$resp = 'cat';
 	}
 	update_option("pua_sliders", $pua_sliders);
+
+	echo $resp;
 }
 
 

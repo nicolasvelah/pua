@@ -4,7 +4,7 @@
 <div class="wrap">
 	<h2>Slider</h2>
 
-	<form method="POST" action="">
+	<form method="POST" name="slides_form">
 		<div id="poststuff">
 			<div id="post-body-content">
 				<div id="titlediv">
@@ -16,10 +16,10 @@
 
 			<div id="postbox-container-2" class="postbox-container">
 				<input type="button" id="insert-image" class="button slideshow-insert-image-slide" value="<?php _e('Image slide', 'slideshow-plugin'); ?>" />
+				<?= '<input type="hidden" name="id" value="'.$id.'" />' ?>
 				<div id="duplicate-list">
 				
 					<?php
-						echo '<input type="hidden" name="id" value="'.$id.'" />';
 						$slides = get_option( 'pua_sliders');
 						$frond_counter = 1;
 						//echo 'id ==='.$slides[$id]['id'];
@@ -32,6 +32,7 @@
 										<img src="'.$slide[1].'" width="200">
 										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
 										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
+										<input type="text" class="order" value="'.$slide[3].'" name="order'.$frond_counter.'">
 										<a href="#" id="remove'.$frond_counter.'" onclick=" get_delete_data('.$frond_counter.', '.$id.')">Remove</a>
 									</div>
 									';
@@ -61,6 +62,7 @@
 		<img class="attachment">
 		<input type="text" class="title" value="" >
 		<input type="text" class="url" value="">
+		<input type="text" class="order" value="">
 		<a href="#" id="remove">Remove</a>
 	</div>
 
