@@ -4,24 +4,29 @@ var t=jQuery;
 /*Drag and drop order*/
 contenedor = jQuery( "#duplicate-list" );
 item_order = jQuery( ".postbox" );
+contenedor.sortable({
+    update: function(event, ui) {
+      contenedor.children('div').each(function(index){
+        jQuery(this).attr('id', 'slide-element-' + (index + 1));
 
-alto = item_order.height() + 21;
+        jQuery(this).find("input.title").attr('name', 'img_title-'+ (index + 1));
 
-item_order.draggable({grid: [ 0, alto ]});
-contenedor.droppable({
-      drop: function( event, ui ) {
-        $( this ).addClass( "ui-state-highlight" );
-      }
-    });
+        jQuery(this).find("input.url").attr('name', 'img_url-'+ (index + 1));
 
-item_order.mouseup(function() {
-    offset = jQuery(this).offset();
-    //alert( offset.top );
+        jQuery(this).find("input.order").attr('value', index + 1);
+        jQuery(this).find("input.order").attr('name', 'img_order-'+ (index + 1));
 
-    t.each(contenedor.children(), function( index, value ) {
-      //alert( index + ": " + value );
-    });
+        jQuery(this).append('<input type="text" value="1" name="neworder">');
+
+        /*jQuery(this).find("a").attr('id', 'remove'+ (index + 1));
+        id = jQuery(this).find("a").attr('onclick');
+        id = id.split(',');
+        id = id[1];
+        jQuery(this).find("a").attr('onclick', 'get_delete_data('+ (index + 1) + ', ' + id + ')');*/
+      });
+    }
 });
+contenedor.disableSelection();
 /*End Drag and drop order*/
 
 

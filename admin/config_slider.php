@@ -31,6 +31,7 @@ function slider(){
 
 		$max_id = $_POST["element-max-id"];
 
+		unset($pua_sliders[$id]);
 		for ($i = 1; $i <= $max_id; $i ++) {
             $field_name = "img_title-" . $i;
             $field_name2 = "img_url-" . $i;
@@ -38,21 +39,11 @@ function slider(){
             $repeat = false;
 
             if (isset($_POST[$field_name]) && isset($_POST[$field_name2])) {
-            	if($pua_sliders != ''){
-            		if($pua_sliders[$id]){
-		            	foreach ($pua_sliders[$id] as $slide) {
-		            		if($slide[2] == $field_name){
-		            			$repeat = true;
-		            		}
-		            	}
-		            }
-	            }
-            	if($repeat == false){
-                	$pua_sliders[$id][] = [esc_attr($_POST[$field_name]), esc_attr($_POST[$field_name2]), $field_name, esc_attr($_POST[$field_name3])];
-            	}
+                $pua_sliders[$id][] = [esc_attr($_POST[$field_name]), esc_attr($_POST[$field_name2]), $field_name, esc_attr($_POST[$field_name3])];
             }
             $element_counter ++;
         }
+        
         $pua_sliders[$id]['id'] = $id;
         $pua_sliders[$id]['title'] = $_POST['slider_title'];
         update_option("pua_sliders", $pua_sliders);
