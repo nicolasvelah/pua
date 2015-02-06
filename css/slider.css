@@ -1,0 +1,4 @@
+#slide_item{display: none;}
+.slide_image{width: 100%; height: 200px; overflow: hidden; position: relative;}
+.postbox{padding-top: 20px;}
+.layer{position: absolute; top:0;}

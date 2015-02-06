@@ -1,5 +1,4 @@
  /*SLIDER ADMIN*/
-var t=jQuery;
 
 /*Drag and drop order*/
 contenedor = jQuery( "#duplicate-list" );
@@ -22,9 +21,32 @@ contenedor.sortable({
     }
 });
 contenedor.disableSelection();
-/*End Drag and drop order*/
 
 
+/*Drag and drop slide*/
+jQuery(".image").click(function(e){
+    jQuery(this).draggable();
+});
+
+
+/*ADD LATER TO SLIDE*/
+function add_layer(id){
+    contend_image = jQuery('#slide-element-' + id);
+    var newId = "slide-layer-"+ id;
+
+    var d = jQuery('#display').clone();
+    d.attr("id", newId);
+    d.text(contend_image.children('.title').attr('value'));
+
+    contend_image.children('.slide_image').append(d);
+
+    d.draggable();
+}
+
+
+
+/*INSERT SLIDE*/
+var t=jQuery;
 jQuery("#insert-image").click(function(e){
     //alert('lklegoi');
     e.preventDefault();
@@ -66,6 +88,7 @@ function insertImageSlide(e){
 }
 
 
+/*BORRAR IMAGEN*/
 function get_delete_data(id_slide, id_cat_slide){
 
     cat_id = id_cat_slide;

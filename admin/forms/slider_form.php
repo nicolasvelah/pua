@@ -1,6 +1,4 @@
-<style type="text/css">
-	#slide_item{display: none;}
-</style>
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/slider.css">
 <div class="wrap">
 	<h2>Slider</h2>
 
@@ -29,7 +27,10 @@
 								if($slide != $id && $slide != $slide_title){
 									echo '
 									<div id="slide-element-'.$frond_counter.'" class="postbox">
-										<img src="'.$slide[1].'" width="200">
+										<div class="slide_image">
+											<img src="'.$slide[1].'" class="image">
+										</div>
+										<a href="#" onclick="add_layer('."'".$frond_counter."'".')">Add layer</a>
 										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
 										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
 										<input type="text" class="order" value="'.$slide[2].'" name="img_order-'.$frond_counter.'">
@@ -67,8 +68,8 @@
 		<input type="text" class="prueba" value="">
 		<a href="#" id="remove">Remove</a>
 	</div>
+	<div id="display" class="layer"></div>
 
-	<div id="display"></div>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript">
 		var counter = <?= $frond_counter ?>;
