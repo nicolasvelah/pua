@@ -15,7 +15,8 @@ contenedor.sortable({
         jQuery(this).find("input.order").attr('value', index + 1);
         jQuery(this).find("input.order").attr('name', 'img_order-'+ (index + 1));
 
-        jQuery(this).find("input.prueba").attr('name', 'img_prueba-'+ (index + 1));
+        jQuery(this).find("input.img_top").attr('name', 'img_top-'+ (index + 1));
+        jQuery(this).find("input.img_left").attr('name', 'img_left-'+ (index + 1));
 
       });
     }
@@ -25,7 +26,23 @@ contenedor.disableSelection();
 
 /*Drag and drop slide*/
 jQuery(".image").click(function(e){
-    jQuery(this).draggable();
+    var image_id = jQuery(this).attr('image-id');
+    var curimg = jQuery(this);
+    jQuery(this).draggable({
+        start: function() {
+            
+        },
+        drag: function() {
+           
+        },
+        stop: function() {
+            imgleft = curimg.css('left');
+            imgtop = curimg.css('top');
+
+            jQuery('.img_top-'+image_id).attr('value', imgtop);
+            jQuery('.img_left-'+image_id).attr('value', imgleft);
+        }
+    });
 });
 
 
@@ -48,7 +65,6 @@ function add_layer(id){
 /*INSERT SLIDE*/
 var t=jQuery;
 jQuery("#insert-image").click(function(e){
-    //alert('lklegoi');
     e.preventDefault();
     var i,l;
     return t.uploader?(t.uploader.open(),void 0):(l=window.slideshow_jquery_image_gallery_backend_script_editSlideshow,i="","object"==typeof l&&"object"==typeof l.localization&&void 0!==l.localization.uploaderTitle&&l.localization.uploaderTitle.length>0&&(i=l.localization.uploaderTitle),t.uploader=wp.media.frames.slideshow_jquery_image_galler_uploader=wp.media({frame:"select",title:i,multiple:!0,library:{type:"image"}}),
@@ -75,7 +91,8 @@ function insertImageSlide(e){
     d.find(".url").attr("name",'img_url-'+counter)
     d.find(".order").attr("value",counter),
     d.find(".order").attr("name",'img_order-'+counter),
-    d.find(".prueba").attr("name",'img_prueba-'+counter)
+    d.find(".img_top").attr("name",'img_top-'+counter),
+    d.find(".img_left").attr("name",'img_left-'+counter)
 
     var removeLink = jQuery("a", d).click(function() {
         jQuery(d).remove();

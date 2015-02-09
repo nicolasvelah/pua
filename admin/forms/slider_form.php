@@ -28,13 +28,14 @@
 									echo '
 									<div id="slide-element-'.$frond_counter.'" class="postbox">
 										<div class="slide_image">
-											<img src="'.$slide[1].'" class="image">
+											<img src="'.$slide[1].'" class="image" id="image_item-'.$frond_counter.'" image-id="'.$frond_counter.'" style="top:'.$slide[3].'; left:'.$slide[4].';">
 										</div>
 										<a href="#" onclick="add_layer('."'".$frond_counter."'".')">Add layer</a>
 										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
 										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
 										<input type="text" class="order" value="'.$slide[2].'" name="img_order-'.$frond_counter.'">
-										<input type="text" class="prueba" value="'.$slide[3].'" name="img_prueba-'.$frond_counter.'">
+										<input type="text" class="img_top-'.$frond_counter.'" value="'.$slide[3].'" name="img_top-'.$frond_counter.'">
+										<input type="text" class="img_left-'.$frond_counter.'" value="'.$slide[4].'" name="img_left-'.$frond_counter.'">
 										<a href="#" id="remove'.$frond_counter.'" onclick=" get_delete_data('.$frond_counter.','.$id.')">Remove</a>
 									</div>
 									';
@@ -65,7 +66,8 @@
 		<input type="text" class="title" value="" >
 		<input type="text" class="url" value="">
 		<input type="text" class="order" value="">
-		<input type="text" class="prueba" value="">
+		<input type="text" class="img_top" value="">
+		<input type="text" class="img_left" value="">
 		<a href="#" id="remove">Remove</a>
 	</div>
 	<div id="display" class="layer"></div>
