@@ -32,9 +32,7 @@ jQuery(".image").click(function(e){
     cur_pos = jQuery(this).position().top;
     jQuery(this).draggable({
         axis: "y",
-        containment: [0, - alto + 200 , 0, alto - 200],
         start: function() {
-            //alert(alto);
             
         },
         drag: function() {

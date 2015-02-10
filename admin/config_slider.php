@@ -46,15 +46,16 @@ function slider(){
  				$sl_holder[] = $value;
  			}
 
- 			if($key == 'slider_title' || $key == 'id'){
- 				if($key == 'slider_title'){$key = 'title';}
+ 			if($key == 'slider_title' || $key == 'id' || $key == 'slider_width' || $key == 'slider_height'){
  				$slides_holder[$key] = $value;
  			}
  		}
  		if($sl_holder){$slides_holder[] = $sl_holder;}
         $pua_sliders[$id] = $slides_holder;
+
+        print_r($pua_sliders[$id]);
         
-        update_option("pua_sliders", $pua_sliders);
+        //update_option("pua_sliders", $pua_sliders);
         ?>
             <div id="message" class="updated">Slide saved</div>
         <?php
@@ -68,7 +69,9 @@ function slider(){
 			echo '</div>';
 		}	
 
-	$slide_title = $pua_sliders[$id]['title'];
+	$slide_title = $pua_sliders[$id]['slider_title'];
+	$slide_width = $pua_sliders[$id]['slider_width'];
+	$slide_height = $pua_sliders[$id]['slider_height'];
 
 	
 

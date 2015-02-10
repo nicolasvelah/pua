@@ -15,8 +15,8 @@
 			<div id="postbox-container-2" class="postbox-container">
 				<input type="button" id="insert-image" class="button slideshow-insert-image-slide" value="<?php _e('Image slide', 'slideshow-plugin'); ?>" />
 				<?= '<input type="hidden" name="id" value="'.$id.'" />' ?>
-				<?= '<input type="text" name="slider_w" value="" />' ?>
-				<?= '<input type="text" name="slider_h" value="" />' ?>
+				<?= '<input type="text" name="slider_width" value="'.$slide_width.'" />' ?>
+				<?= '<input type="text" name="slider_height" value="'.$slide_height.'" />' ?>
 				<div id="duplicate-list">
 				
 					<?php
