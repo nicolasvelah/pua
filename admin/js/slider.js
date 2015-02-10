@@ -28,8 +28,13 @@ contenedor.disableSelection();
 jQuery(".image").click(function(e){
     var image_id = jQuery(this).attr('image-id');
     var curimg = jQuery(this);
+    alto = jQuery(this).height();
+    cur_pos = jQuery(this).position().top;
     jQuery(this).draggable({
+        axis: "y",
+        containment: [0, - alto + 200 , 0, alto - 200],
         start: function() {
+            //alert(alto);
             
         },
         drag: function() {
@@ -39,8 +44,8 @@ jQuery(".image").click(function(e){
             imgleft = curimg.css('left');
             imgtop = curimg.css('top');
 
-            jQuery('.img_top-'+image_id).attr('value', imgtop);
-            jQuery('.img_left-'+image_id).attr('value', imgleft);
+            jQuery('#img_top-'+image_id).attr('value', imgtop);
+            jQuery('#img_left-'+image_id).attr('value', imgleft);
         }
     });
 });
@@ -92,7 +97,9 @@ function insertImageSlide(e){
     d.find(".order").attr("value",counter),
     d.find(".order").attr("name",'img_order-'+counter),
     d.find(".img_top").attr("name",'img_top-'+counter),
-    d.find(".img_left").attr("name",'img_left-'+counter)
+    d.find(".img_left").attr("name",'img_left-'+counter),
+    d.find(".img_top").attr("id",'img_top-'+counter),
+    d.find(".img_left").attr("id",'img_left-'+counter)
 
     var removeLink = jQuery("a", d).click(function() {
         jQuery(d).remove();

@@ -15,6 +15,8 @@
 			<div id="postbox-container-2" class="postbox-container">
 				<input type="button" id="insert-image" class="button slideshow-insert-image-slide" value="<?php _e('Image slide', 'slideshow-plugin'); ?>" />
 				<?= '<input type="hidden" name="id" value="'.$id.'" />' ?>
+				<?= '<input type="text" name="slider_w" value="" />' ?>
+				<?= '<input type="text" name="slider_h" value="" />' ?>
 				<div id="duplicate-list">
 				
 					<?php
@@ -34,8 +36,8 @@
 										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
 										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
 										<input type="text" class="order" value="'.$slide[2].'" name="img_order-'.$frond_counter.'">
-										<input type="text" class="img_top-'.$frond_counter.'" value="'.$slide[3].'" name="img_top-'.$frond_counter.'">
-										<input type="text" class="img_left-'.$frond_counter.'" value="'.$slide[4].'" name="img_left-'.$frond_counter.'">
+										<input type="text" class="img_top" id="img_top-'.$frond_counter.'" value="'.$slide[3].'" name="img_top-'.$frond_counter.'">
+										<input type="text" class="img_left" id="img_left-'.$frond_counter.'" value="'.$slide[4].'" name="img_left-'.$frond_counter.'">
 										<a href="#" id="remove'.$frond_counter.'" onclick=" get_delete_data('.$frond_counter.','.$id.')">Remove</a>
 									</div>
 									';
