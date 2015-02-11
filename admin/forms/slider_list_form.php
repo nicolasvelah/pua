@@ -3,7 +3,7 @@
 <a href="admin.php?page=slider_settings&new=new">New</a><br><br>
 <?php 
 	foreach ($pua_sliders as $slider) {
-		echo '<a href="admin.php?page=slider_settings&id='.$slider['id'].'">'.$slider['title'].'</a><br>
+		echo '<a href="admin.php?page=slider_settings&id='.$slider['id'].'">'.$slider['slider_title'].'</a><br>
 		<a href="#" id="remove'.$slider['id'].'" onclick=" get_delete_data(null, '.$slider['id'].')">Remove</a>
 		<hr>';
 	}

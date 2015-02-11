@@ -38,6 +38,7 @@ function slider(){
 
  			if(is_numeric($item_id)){
  				if($numcontrol != $item_id){
+ 					echo('hola');
  					$slides_holder[] = $sl_holder;
  					unset($sl_holder);
  					$numcontrol++;
@@ -52,10 +53,8 @@ function slider(){
  		}
  		if($sl_holder){$slides_holder[] = $sl_holder;}
         $pua_sliders[$id] = $slides_holder;
-
-        print_r($pua_sliders[$id]);
         
-        //update_option("pua_sliders", $pua_sliders);
+        update_option("pua_sliders", $pua_sliders);
         ?>
             <div id="message" class="updated">Slide saved</div>
         <?php
@@ -70,9 +69,16 @@ function slider(){
 		}	
 
 	$slide_title = $pua_sliders[$id]['slider_title'];
-	$slide_width = $pua_sliders[$id]['slider_width'];
-	$slide_height = $pua_sliders[$id]['slider_height'];
+	$slide_width_value = $pua_sliders[$id]['slider_width'];
+	$slide_height_value = $pua_sliders[$id]['slider_height'];
 
+	if(!$slide_width_value){
+		$slide_width_value = '100';
+		$slide_height_value = '3:1';
+	}
+	$slide_width = $slide_width_value.'%';
+	$slide_height = explode(":",$slide_height_value);
+	$slide_height = ($slide_height[1] * $slide_width)/ $slide_height[0].'vh';
 	
 
 	include('forms/slider_form.php');
@@ -96,8 +102,8 @@ function delete_slide(){
 	$$pua_sliders_tipo  = [];
 
 	if($pua_sliders[$cat_slide_id] && $slide_id != null){
-		foreach ($pua_sliders[$cat_slide_id] as $slide) {
-			if(is_array ($slide)){
+		foreach ($pua_sliders[$cat_slide_id] as $clave => $slide) {
+			if(is_numeric($clave)){
 				if($id_slide != $slide_id){
 					$slide[2] = $id_slide2;
 					array_push($pua_sliders_holder, $slide);
@@ -105,29 +111,20 @@ function delete_slide(){
 				}
 				$id_slide++;
 			}else{
-				if($slide == $pua_sliders[$cat_slide_id]['id']){
-					$tipo = 'id';
-				}else if($slide == $pua_sliders[$cat_slide_id]['title']){
-					$tipo = 'title';
-				}
-				$pua_sliders_tipo[$tipo] = $slide;
+				$pua_sliders_tipo[$clave] = $slide;
 			}
 		}
 	
 		$pua_sliders[$cat_slide_id] = $pua_sliders_holder;
-		$val_tipo = 1;
-		foreach ($pua_sliders_tipo as $tipo) {
-			if($val_tipo == 1){$tipo_t = 'title';}
-			else{$tipo_t = 'id';}
-			$pua_sliders[$cat_slide_id][$tipo_t] = $tipo;
-			$val_tipo++;
+		foreach ($pua_sliders_tipo as $clave => $tipo) {
+			$pua_sliders[$cat_slide_id][$clave] = $tipo;
 		}
 
 		$resp = 'slide';
 	}else{
 		$pua_sliders_holder[0] = '';
 		foreach ($pua_sliders as $slide) {
-			if($slide['title'] != $pua_sliders[$cat_slide_id]['title']){
+			if($slide['slider_title'] != $pua_sliders[$cat_slide_id]['slider_title']){
 				$slide['id'] = $id_slide;
 				array_push($pua_sliders_holder, $slide);
 				$id_slide++;

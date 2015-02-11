@@ -50,9 +50,13 @@ jQuery(".image").click(function(e){
 
 
 /*ADD LATER TO SLIDE*/
+layer_id = 0;
+slider_id = '';
 function add_layer(id){
+    if(slider_id == ''){slider_id = id;}
+    else if(slider_id != id){layer_id = 0;slider_id = id;}
     contend_image = jQuery('#slide-element-' + id);
-    var newId = "slide-layer-"+ id;
+    var newId = "slide-layer-"+ layer_id;
 
     var d = jQuery('#display').clone();
     d.attr("id", newId);
@@ -61,6 +65,7 @@ function add_layer(id){
     contend_image.children('.slide_image').append(d);
 
     d.draggable();
+    layer_id++;
 }
 
 

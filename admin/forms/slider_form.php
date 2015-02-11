@@ -15,8 +15,8 @@
 			<div id="postbox-container-2" class="postbox-container">
 				<input type="button" id="insert-image" class="button slideshow-insert-image-slide" value="<?php _e('Image slide', 'slideshow-plugin'); ?>" />
 				<?= '<input type="hidden" name="id" value="'.$id.'" />' ?>
-				<?= '<input type="text" name="slider_width" value="'.$slide_width.'" />' ?>
-				<?= '<input type="text" name="slider_height" value="'.$slide_height.'" />' ?>
+				<?= '<input type="text" name="slider_width" value="'.$slide_width_value.'" />' ?>
+				<?= '<input type="text" name="slider_height" value="'.$slide_height_value.'" />' ?>
 				<div id="duplicate-list">
 				
 					<?php
@@ -25,19 +25,19 @@
 						//echo 'id ==='.$slides[$id]['id'];
 
 						if($slides[$id]){
-							foreach ($slides[$id] as $slide) {
-								if($slide != $id && $slide != $slide_title){
+							foreach ($slides[$id] as $clave => $slide) {
+								if(is_numeric($clave)){
 									echo '
 									<div id="slide-element-'.$frond_counter.'" class="postbox">
-										<div class="slide_image">
+										<div class="slide_image" style=" min-width:'.$slide_width.'; min-height:'.$slide_height.';">
 											<img src="'.$slide[1].'" class="image" id="image_item-'.$frond_counter.'" image-id="'.$frond_counter.'" style="top:'.$slide[3].'; left:'.$slide[4].';">
 										</div>
 										<a href="#" onclick="add_layer('."'".$frond_counter."'".')">Add layer</a>
-										<input type="text" class="title" value="'.$slide[0].'" name="img_title-'.$frond_counter.'">
-										<input type="text" class="url" value="'.$slide[1].'" name="img_url-'.$frond_counter.'">
-										<input type="text" class="order" value="'.$slide[2].'" name="img_order-'.$frond_counter.'">
-										<input type="text" class="img_top" id="img_top-'.$frond_counter.'" value="'.$slide[3].'" name="img_top-'.$frond_counter.'">
-										<input type="text" class="img_left" id="img_left-'.$frond_counter.'" value="'.$slide[4].'" name="img_left-'.$frond_counter.'">
+										<input type="text" class="title" value="'.$slide[0].'" name="_img_title-'.$frond_counter.'">
+										<input type="text" class="url" value="'.$slide[1].'" name="_img_url-'.$frond_counter.'">
+										<input type="text" class="order" value="'.$slide[2].'" name="_img_order-'.$frond_counter.'">
+										<input type="text" class="img_top" id="img_top-'.$frond_counter.'" value="'.$slide[3].'" name="_img_top-'.$frond_counter.'">
+										<input type="text" class="img_left" id="img_left-'.$frond_counter.'" value="'.$slide[4].'" name="_img_left-'.$frond_counter.'">
 										<a href="#" id="remove'.$frond_counter.'" onclick=" get_delete_data('.$frond_counter.','.$id.')">Remove</a>
 									</div>
 									';
@@ -72,7 +72,8 @@
 		<input type="text" class="img_left" value="">
 		<a href="#" id="remove">Remove</a>
 	</div>
-	<div id="display" class="layer"></div>
+	<div id="display" class="layer">
+	</div>
 
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript">
